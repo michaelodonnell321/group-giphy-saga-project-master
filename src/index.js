@@ -12,14 +12,22 @@ function* watcherSaga() {
     //takeevery goes here
 }
 
+const gifReducer = (state = '', action) => {
+    console.log('im a gif reducer');
+    return state;
+}
+
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
     combineReducers({
         //reducers need to be called in here to work
+        gifReducer,
     }),
     applyMiddleware(sagaMiddleware, logger)
 )
 
-const sagaMiddleware = createSagaMiddleware();
+
 
 sagaMiddleware.run(watcherSaga);
 
