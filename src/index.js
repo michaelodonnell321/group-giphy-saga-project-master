@@ -18,7 +18,7 @@ function* getSaga(action) {
         // ANYTHING WITH THE TYPE 'SET_GIFS' COMES HERE AND SENDS TO THE REDUCER
         yield put ({
             type: 'SET_GIFS',
-            payload: response.data.data.images.original.url
+            payload: response.data.data
         })
     } catch (err) {
         console.log('error in get saga:', err)
