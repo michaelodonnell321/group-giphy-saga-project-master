@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 // Route includes
 const favoriteRouter = require('./routes/favorite.router');
