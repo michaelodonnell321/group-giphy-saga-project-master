@@ -11,6 +11,15 @@ class App extends Component {
     return (
       <Router>
       <div>
+        <ul>
+          <li>
+            <Link to="/">Search</Link>
+          </li>
+          <li>
+            <Link to="/favorites">Favorites</Link>
+          </li>
+        </ul>
+        
         <Header />
         <Route path='/' exact component={Home} />
         <Route path='/favorites' component={Favorites} />
