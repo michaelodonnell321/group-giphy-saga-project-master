@@ -23,9 +23,22 @@ function* getSaga() {
     }
 }
 
+
+function* test(action) {
+    try{
+        let response = yield axios.get('/api/giphy')
+        console.log('in test:', response.data)
+    } catch (err) {
+        console.log('in testing error:', err);
+        
+    }
+}
+
 function* watcherSaga() {
     //takeevery goes here
     yield takeEvery('GET_GIFS', getSaga)
+    //testing yield:
+    yield takeEvery('TESTING', test)
 }
 
 const getReducer = (state = [], action) => {
