@@ -25,6 +25,14 @@ function* getSaga(action) {
     }
 }
 
+function* postFavorites(action) {
+    try{
+        yield axios.post(`/api/favorite`, action.payload)
+    }catch (err) {
+        console.log('error in post saga', err)
+    }
+}
+
 
 // function* test(action) {
 //     try{
@@ -39,8 +47,7 @@ function* getSaga(action) {
 function* watcherSaga() {
     //takeevery goes here
     yield takeEvery('GET_GIFS', getSaga)
-    //testing yield:
-    // yield takeEvery('TESTING', test)
+    yield takeEvery('FAVORITE_GIF', postFavorites)
 }
 
 const getGifReducer = (state = [], action) => {

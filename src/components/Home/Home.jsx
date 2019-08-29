@@ -38,6 +38,16 @@ class Home extends Component {
         //pushes us to Favorites page
         //this.props.history.push('/favorites')
     }
+    //dispatching url of favorites to reducer
+    handleFavorite = (url) => {
+        console.log('in handleFavorite:', url);
+        this.props.dispatch({
+            type: 'FAVORITE_GIF',
+            payload: url
+        })
+    }
+
+
 
     render() {
         return(
@@ -50,7 +60,7 @@ class Home extends Component {
                 return (
                     <div>
                         <img src={gif.images.downsized.url} />
-                        <button>Favorite</button>
+                        <button onClick={() => this.handleFavorite(gif.images.downsized.url)}>Favorite</button>
                     </div>
                 )
             })}
