@@ -1,3 +1,4 @@
+import axios from 'axios';
 const express = require('express');
 const pool = require('../modules/pool');
 
@@ -6,6 +7,7 @@ require('dotenv').config();
 process.env.API_KEY
 
 router.get('/', (req, res) => {
+    // GET REQUEST TO GIPHY SEARCH
     axios.get(`http://api.giphy.com/v1/gifs/search?API_KEY=${process.env.API_KEY}&q=bananas`)
         .then((response) => {
             console.log('in GET:', response.data);

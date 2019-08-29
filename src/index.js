@@ -8,13 +8,36 @@ import createSagaMiddleware from 'redux-saga';
 import {takeEvery, put} from 'redux-saga/effects';
 import axios from 'axios';
 
-function* watcherSaga() {
-    //takeevery goes here
+function* getSaga() {
+    try {
+        // RESPONSE = GRABS THE INFO FROM OUR SERVER
+        let response = yield axios.get('/api/category')
+        console.log('in get saga:', response.data)
+        // ANYTHING WITH THE TYPE 'SET_GIFS' COMES HERE AND SENDS TO THE REDUCER
+        yield put ({
+            type: 'SET_GIFS',
+            payload: response.data
+        })
+    } catch (err) {
+        console.log('error in get saga:', err)
+    }
 }
 
-const gifReducer = (state = '', action) => {
+function* watcherSaga() {
+    //takeevery goes here
+    yield takeEvery('GET_GIFS', getSaga)
+}
+
+const getReducer = (state = [], action) => {
     console.log('im a gif reducer');
-    return state;
+    
+    switch (action.type) {
+        // ANYTHING WITH ACTION TYPE 'SET_GIFS' COME HERE AND RETURNS THE INFO IN AN ARRAY
+        case 'SET_GIFS':
+            return [...state, action.payload]
+        default:
+            return state
+    }
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -22,7 +45,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     combineReducers({
         //reducers need to be called in here to work
-        gifReducer,
+        getReducer,
     }),
     applyMiddleware(sagaMiddleware, logger)
 )
