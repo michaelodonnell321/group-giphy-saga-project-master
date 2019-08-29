@@ -28,7 +28,7 @@ class Home extends Component {
     }
 
     handleClick = (event) => {
-        console.log('handleClick operational')
+        console.log('handleClick operational:', this.state.item)
         //dispatch to reducers
         this.props.dispatch({
             type: 'GET_GIFS',

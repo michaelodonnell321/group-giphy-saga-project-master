@@ -11,7 +11,9 @@ import axios from 'axios';
 function* getSaga(action) {
     try {
         // GRABS GIFS FROM GIPHY
-        let response = yield axios.get('/api/giphy?q=')
+        let search = action.payload
+        let response = yield axios.get(`/api/giphy/${search}`)
+        console.log('in get saga:', search);
         console.log('in get saga:', response.data)
         // ANYTHING WITH THE TYPE 'SET_GIFS' COMES HERE AND SENDS TO THE REDUCER
         yield put ({
