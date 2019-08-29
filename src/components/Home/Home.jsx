@@ -2,6 +2,18 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class Home extends Component {
+
+
+    componentDidMount() {
+        console.log('HOME IS LOADED');
+        
+        //test route to api and get the giphiessss
+        this.props.dispatch({
+            type: 'TESTING'
+        })
+    }
+
+
     //localstate
     state = {
         item: '',
