@@ -46,15 +46,16 @@ class Home extends Component {
             <input onChange={this.handleChange} type='text' placeholder='Search For Your GIF'/>
             <button onClick={this.handleClick}>SUBMIT</button>
             {/* loop through the store (mapStateToProps) and render each item onto the DOM in a div */}
-            {/* {this.props.reduxStore.getGifReducer.data.map(gif => {
+                {this.props.reduxStore.getGifReducer.map(gif => {
                 return (
                     <div>
-                        {gif}
+                        <img src={gif.images.downsized.url} />
+                        <button>Favorite</button>
                     </div>
                 )
-            })} */}
+            })}
 
-                {JSON.stringify(this.props.reduxStore)}
+                {/* {JSON.stringify(this.props.reduxStore.getGifReducer)} */}
             </div>
         )
     }
