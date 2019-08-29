@@ -30,7 +30,6 @@ function* watcherSaga() {
 
 const getReducer = (state = [], action) => {
     console.log('im a gif reducer');
-    
     switch (action.type) {
         // ANYTHING WITH ACTION TYPE 'SET_GIFS' COME HERE AND RETURNS THE INFO IN AN ARRAY
         case 'SET_GIFS':
@@ -38,6 +37,7 @@ const getReducer = (state = [], action) => {
         default:
             return state
     }
+
 }
 
 const sagaMiddleware = createSagaMiddleware();
