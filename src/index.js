@@ -14,6 +14,7 @@ function* watcherSaga() {
 
 const gifReducer = (state = '', action) => {
     console.log('im a gif reducer');
+    
     return state;
 }
 
