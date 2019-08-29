@@ -8,15 +8,15 @@ import createSagaMiddleware from 'redux-saga';
 import {takeEvery, put} from 'redux-saga/effects';
 import axios from 'axios';
 
-function* getSaga() {
+function* getSaga(action) {
     try {
-        // RESPONSE = GRABS THE INFO FROM OUR SERVER
-        let response = yield axios.get('/api/category')
+        // GRABS GIFS FROM GIPHY
+        let response = yield axios.get('/api/giphy?q=')
         console.log('in get saga:', response.data)
         // ANYTHING WITH THE TYPE 'SET_GIFS' COMES HERE AND SENDS TO THE REDUCER
         yield put ({
             type: 'SET_GIFS',
-            payload: response.data
+            payload: response.data.data.images.original.url
         })
     } catch (err) {
         console.log('error in get saga:', err)
@@ -24,29 +24,29 @@ function* getSaga() {
 }
 
 
-function* test(action) {
-    try{
-        let response = yield axios.get('/api/giphy')
-        console.log('in test:', response.data)
-    } catch (err) {
-        console.log('in testing error:', err);
+// function* test(action) {
+//     try{
+//         let response = yield axios.get('/api/giphy')
+//         console.log('in test:', response.data)
+//     } catch (err) {
+//         console.log('in testing error:', err);
         
-    }
-}
+//     }
+// }
 
 function* watcherSaga() {
     //takeevery goes here
     yield takeEvery('GET_GIFS', getSaga)
     //testing yield:
-    yield takeEvery('TESTING', test)
+    // yield takeEvery('TESTING', test)
 }
 
-const getReducer = (state = [], action) => {
+const getGifReducer = (state = [], action) => {
     console.log('im a gif reducer');
     switch (action.type) {
         // ANYTHING WITH ACTION TYPE 'SET_GIFS' COME HERE AND RETURNS THE INFO IN AN ARRAY
         case 'SET_GIFS':
-            return [...state, action.payload]
+            return action.payload
         default:
             return state
     }
@@ -58,7 +58,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     combineReducers({
         //reducers need to be called in here to work
-        getReducer,
+        getGifReducer,
     }),
     applyMiddleware(sagaMiddleware, logger)
 )
