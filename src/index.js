@@ -48,6 +48,20 @@ function* getFavorites(action) {
     }
 }
 
+function* getCategorySaga(action) {
+    //SAGA FOR GETTING CATEGORIES OF GIFS ON FAVORITES PAGE
+    try {
+        let response = yield axios.get('/api/category')
+        console.log('in get categories saga', response.data)
+        yield put ({
+            type: 'SET_CATEGORIES',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('error in get categories saga', error);
+    }
+}
+
 
 
 // function* test(action) {
@@ -65,6 +79,7 @@ function* watcherSaga() {
     yield takeEvery('GET_GIFS', getSaga)
     yield takeEvery('FAVORITE_GIF', postFavorites)
     yield takeEvery('GET_FAVORITES', getFavorites)
+    yield takeEvery('GET_CATEGORY', getCategorySaga)
     // yield takeEvery('GET_FAVORITES', getFavorites)
 }
 
@@ -89,6 +104,15 @@ const getFavoritesReducer = (state = [], action) => {
     }
 }
 
+const getCategoriesReducer = (state = [], action) => {
+    console.log('start categories reducer');
+    switch (action.type) {
+        case 'SET_CATEGORIES':
+            return action.payload
+        default:
+            return state
+    }
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -96,7 +120,9 @@ const store = createStore(
     combineReducers({
         //reducers need to be called in here to work
         getGifReducer,
-        getFavoritesReducer
+        getFavoritesReducer,
+        getCategoriesReducer
+
     }),
     applyMiddleware(sagaMiddleware, logger)
 )
