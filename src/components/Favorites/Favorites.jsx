@@ -34,6 +34,14 @@ class Favorites extends Component {
             <div>
                 <h2>Favorite Component</h2>
                 {/* MAP SOMETHING HERE */}
+                {this.props.reduxStore.getFavorites.map(fav => {
+                    return (
+                        <div>
+                            <img src={fav.url} />
+                        </div>
+                    )
+                })}
+            
                 <button onClick={this.deleteClick}>SUBMIT</button>
             </div>
         )

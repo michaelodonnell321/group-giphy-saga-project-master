@@ -35,7 +35,7 @@ function* postFavorites(action) {
 }
 
 // TO DO - GET FAVORITES SAGA
-function* getFavorites(action) {
+function* getFavorites() {
     try {
         let response = yield axios.get('/api/favorite')
         console.log('in get favorites saga', response.data)
