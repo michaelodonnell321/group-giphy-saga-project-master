@@ -17,9 +17,24 @@ class Favorites extends Component {
         console.log('get favorites baby');
     }
 
+    state = {
+        item: '',
+    }
+
+    // SET CATEGORY
+    // handleChange(event) {
+    //     console.log(this.state);
+    //     this.setState({
+    //         item: event.target.item
+    //     })
+    //     console.log('item:', event.target.item)
+    //     this.props.dispatch({
+    //         type: 'GET_CATEGORY'
+    // })
+
     //DELETE BUTTON
-    deleteClick = (event) => {
-        console.log('deleteClick operational')
+    // deleteClick = (event) => {
+    //     console.log('deleteClick operational')
         //dispatch to reducers
         // this.props.dispatch({
             // type: // delete reducer
@@ -27,9 +42,10 @@ class Favorites extends Component {
         // })
         //pushes us to Collection page
         // this.props.history.push('/home')
-    }
+    // }
 
     render() {
+        console.log(this.state)
         return (
             <div>
                 <h2>Favorite Component</h2>
@@ -39,11 +55,19 @@ class Favorites extends Component {
                     return (
                         <div>
                             <img src={fav.url} />
+                            <select value={this.state.item} onChange={this.handleChange}>
+                                <option value=""></option>
+                                <option value="funny">Funny</option>
+                                <option value="vega">Vega</option>
+                                <option value="cartoon">Cartoon</option>
+                                <option value="nsfw">NSFW</option>
+                                <option value="meme">Meme</option>
+                            </select>
                         </div>
                     )
                 })}
             
-                <button onClick={this.deleteClick}>SUBMIT</button>
+                {/* <button onClick={this.deleteClick}>SUBMIT</button> */}
             </div>
         )
     }
