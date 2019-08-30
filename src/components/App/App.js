@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import Home from '../Home/Home';
 import {HashRouter as Router, Route, Link} from 'react-router-dom';
-import Favorites from '../Favorites/Favorites'
+import Favorites from '../Favorites/Favorites';
+import NavBar from '../NavBar/NavBar';
+import './App.css';
 
 
 class App extends Component {
@@ -11,6 +13,7 @@ class App extends Component {
     return (
       <Router>
       <div>
+        <NavBar />
         <ul>
           <li>
             <Link to="/">Search</Link>

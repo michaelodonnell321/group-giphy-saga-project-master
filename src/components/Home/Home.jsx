@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Button, TextField} from '@material-ui/core'
+import './Home.css'
 
 class Home extends Component {
 
@@ -35,9 +37,14 @@ class Home extends Component {
             payload: this.state.item
         })
         console.log(this.state.item)
+        this.setState ({
+            item: '',
+        })
         //pushes us to Favorites page
         //this.props.history.push('/favorites')
     }
+
+
     //dispatching url of favorites to reducer
     handleFavorite = (url) => {
         console.log('in handleFavorite:', url);
@@ -52,16 +59,20 @@ class Home extends Component {
     render() {
         return(
             <div>
+            <div className="inputDiv">
             <h2>Home Component</h2>
-            <input onChange={this.handleChange} type='text' placeholder='Search For Your GIF'/>
-            <button onClick={this.handleClick}>SUBMIT</button>
+            <TextField variant="filled" onChange={this.handleChange} type='text' placeholder='Search For Your GIF'/><br/>
+            <Button variant="outlined" color="secondary" onClick={this.handleClick}>SUBMIT</Button><br/>
+            </div>
+
+            <div className="searchResultDiv">
             {/* loop through the store (mapStateToProps) and render each item onto the DOM in a div */}
                 {this.props.reduxStore.getGifReducer.map(gif => {
                 return (
                     <div className="renderDiv">
-                        <img src={gif.images.fixed_height.url} />
+                        <img src={gif.images.fixed_height.url} /><br/>
                         <button onClick={() => this.handleFavorite(gif.images.fixed_height.url)}>Favorite</button>
-                        {JSON.stringify(gif.images.fixed_height.url)}
+                        {/* {JSON.stringify(gif.images.fixed_height.url)} */}
                     </div>
                 )
                 
@@ -69,6 +80,7 @@ class Home extends Component {
                 
 
                 {/* {JSON.stringify(this.props.reduxStore.getGifReducer)} */}
+            </div>
             </div>
         )
     }
