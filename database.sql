@@ -13,6 +13,7 @@ CREATE TABLE "category" (
 INSERT INTO "category" ("name")
 VALUES ('funny'), ('vega'), ('cartoon'), ('nsfw'), ('meme');
 
+-- favorites Table
 CREATE TABLE "favorites" (
     "id" SERIAL PRIMARY KEY,
     "url" VARCHAR (250) NOT NULL,
