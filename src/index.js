@@ -35,14 +35,18 @@ function* postFavorites(action) {
 }
 
 // TO DO - GET FAVORITES SAGA
-// function* getFavorites(action) {
-//     try {
-//         yield axios.get('/api/favorite')
-//         console.log('in get favorites saga', response.data)
-//     }catch (error) {
-//         console.log('error in get favorites saga', error);
-//     }
-// }
+function* getFavorites(action) {
+    try {
+        let response = yield axios.get('/api/favorite')
+        console.log('in get favorites saga', response.data)
+        yield put ({
+            type: 'SET_FAVORITES',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('error in get favorites saga', error);
+    }
+}
 
 
 
@@ -60,6 +64,7 @@ function* watcherSaga() {
     //takeevery goes here
     yield takeEvery('GET_GIFS', getSaga)
     yield takeEvery('FAVORITE_GIF', postFavorites)
+    yield takeEvery('GET_FAVORITES', getFavorites)
     // yield takeEvery('GET_FAVORITES', getFavorites)
 }
 
@@ -74,6 +79,15 @@ const getGifReducer = (state = [], action) => {
     }
 }
 
+const getFavoritesReducer = (state = [], action) => {
+    console.log('start gif favorite reducer');
+    switch (action.type) {
+        case 'SET_FAVORITES':
+            return action.payload
+        default: 
+            return state
+    }
+}
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -82,6 +96,7 @@ const store = createStore(
     combineReducers({
         //reducers need to be called in here to work
         getGifReducer,
+        getFavoritesReducer
     }),
     applyMiddleware(sagaMiddleware, logger)
 )
