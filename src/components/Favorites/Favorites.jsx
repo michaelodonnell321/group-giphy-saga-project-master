@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 class Favorites extends Component {
 
+    // LOADS ALL THE FAVORITES FROM THE DATABASE
     componentDidMount(){
         //load favorites on mount
         this.getFavorites();
