@@ -34,7 +34,8 @@ class Favorites extends Component {
             <div>
                 <h2>Favorite Component</h2>
                 {/* MAP SOMETHING HERE */}
-                {this.props.reduxStore.getFavorites.map(fav => {
+                {/* {JSON.stringify(this.props.reduxStore.getFavoritesReducer)} */}
+                {this.props.reduxStore.getFavoritesReducer.map(fav => {
                     return (
                         <div>
                             <img src={fav.url} />
