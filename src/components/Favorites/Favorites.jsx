@@ -3,6 +3,19 @@ import { connect } from 'react-redux';
 
 class Favorites extends Component {
 
+    componentDidMount(){
+        //load favorites on mount
+        this.getFavorites();
+    }
+
+    //TODO - NEED TO GET THE FAVORITES FROM INDEX AND DB
+    getFavorites= () => {
+        this.props.dispatch({
+            type: 'GET_FAVORITES'
+        })
+        console.log('get favorites baby');
+    }
+
     //DELETE BUTTON
     deleteClick = (event) => {
         console.log('deleteClick operational')
@@ -19,6 +32,7 @@ class Favorites extends Component {
         return (
             <div>
                 <h2>Favorite Component</h2>
+                {/* MAP SOMETHING HERE */}
                 <button onClick={this.deleteClick}>SUBMIT</button>
             </div>
         )
