@@ -34,14 +34,15 @@ function* postFavorites(action) {
     }
 }
 
-function* getFavorites(action) {
-    try {
-        yield axios.get('/api/favorite')
-        console.log('in get favorites saga', response.data)
-    }catch (error) {
-        console.log('error in get favorites saga', error);
-    }
-}
+// TO DO - GET FAVORITES SAGA
+// function* getFavorites(action) {
+//     try {
+//         yield axios.get('/api/favorite')
+//         console.log('in get favorites saga', response.data)
+//     }catch (error) {
+//         console.log('error in get favorites saga', error);
+//     }
+// }
 
 
 
@@ -59,7 +60,7 @@ function* watcherSaga() {
     //takeevery goes here
     yield takeEvery('GET_GIFS', getSaga)
     yield takeEvery('FAVORITE_GIF', postFavorites)
-    yield takeEvery('GET_FAVORITES', getFavorites)
+    // yield takeEvery('GET_FAVORITES', getFavorites)
 }
 
 const getGifReducer = (state = [], action) => {
