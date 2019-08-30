@@ -28,10 +28,14 @@ function* getSaga(action) {
 function* postFavorites(action) {
     try{
         yield axios.post(`/api/favorite`, action.payload)
+       
     }catch (err) {
         console.log('error in post saga', err)
     }
 }
+
+
+
 
 
 // function* test(action) {
@@ -59,8 +63,9 @@ const getGifReducer = (state = [], action) => {
         default:
             return state
     }
-
 }
+
+
 
 const sagaMiddleware = createSagaMiddleware();
 

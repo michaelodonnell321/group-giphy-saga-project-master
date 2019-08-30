@@ -43,7 +43,7 @@ class Home extends Component {
         console.log('in handleFavorite:', url);
         this.props.dispatch({
             type: 'FAVORITE_GIF',
-            payload: url
+            payload: {address: url}
         })
     }
 
@@ -58,12 +58,15 @@ class Home extends Component {
             {/* loop through the store (mapStateToProps) and render each item onto the DOM in a div */}
                 {this.props.reduxStore.getGifReducer.map(gif => {
                 return (
-                    <div>
-                        <img src={gif.images.downsized.url} />
-                        <button onClick={() => this.handleFavorite(gif.images.downsized.url)}>Favorite</button>
+                    <div className="renderDiv">
+                        <img src={gif.images.fixed_height.url} />
+                        <button onClick={() => this.handleFavorite(gif.images.fixed_height.url)}>Favorite</button>
+                        {JSON.stringify(gif.images.fixed_height.url)}
                     </div>
                 )
+                
             })}
+                
 
                 {/* {JSON.stringify(this.props.reduxStore.getGifReducer)} */}
             </div>
